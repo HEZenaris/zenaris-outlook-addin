@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zenaris Draft</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f8f9fb;
+      color: #1a1a2e;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #e8eaef;
+    }
+
+    .logo {
+      width: 28px;
+      height: 28px;
+      background: #0055a4;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .header h1 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0055a4;
+    }
+
+    .mail-info {
+      background: white;
+      border: 1px solid #e8eaef;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .mail-info .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #8a8fa3;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .mail-info .from {
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 2px;
+    }
+
+    .mail-info .subject {
+      color: #4a4e69;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #8a8fa3;
+      margin-bottom: 8px;
+    }
+
+    .mode-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .mode-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: white;
+      border: 2px solid #e8eaef;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .mode-btn:hover {
+      border-color: #0055a4;
+      background: #f0f5ff;
+    }
+
+    .mode-btn.selected {
+      border-color: #0055a4;
+      background: #f0f5ff;
+      box-shadow: 0 0 0 1px #0055a4;
+    }
+
+    .mode-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .mode-icon.reply { background: #e8f4fd; }
+    .mode-icon.calendar { background: #e8fde8; }
+    .mode-icon.cal-only { background: #fdf5e8; }
+
+    .mode-text h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 2px;
+    }
+
+    .mode-text p {
+      font-size: 12px;
+      color: #8a8fa3;
+    }
+
+    .context-field {
+      margin-bottom: 20px;
+    }
+
+    .context-field textarea {
+      width: 100%;
+      min-height: 70px;
+      padding: 12px;
+      border: 2px solid #e8eaef;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #1a1a2e;
+      resize: vertical;
+      transition: border-color 0.2s;
+      background: white;
+    }
+
+    .context-field textarea:focus {
+      outline: none;
+      border-color: #0055a4;
+    }
+
+    .context-field textarea::placeholder {
+      color: #b0b4c8;
+    }
+
+    .generate-btn {
+      width: 100%;
+      padding: 14px;
+      background: #0055a4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.3px;
+    }
+
+    .generate-btn:hover {
+      background: #003d7a;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 85, 164, 0.3);
+    }
+
+    .generate-btn:disabled {
+      background: #b0b4c8;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .status {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      text-align: center;
+      display: none;
+    }
+
+    .status.loading {
+      display: block;
+      background: #e8f4fd;
+      color: #0055a4;
+    }
+
+    .status.success {
+      display: block;
+      background: #e8fde8;
+      color: #1a7a1a;
+    }
+
+    .status.error {
+      display: block;
+      background: #fde8e8;
+      color: #a40000;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #0055a4;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Z</div>
+    <h1>Zenaris Draft</h1>
+  </div>
+
+  <div class="mail-info" id="mailInfo">
+    <div class="label">Aktuelle Mail</div>
+    <div class="from" id="mailFrom">Wird geladen...</div>
+    <div class="subject" id="mailSubject"></div>
+  </div>
+
+  <div class="section-label">Modus wählen</div>
+  <div class="mode-buttons">
+    <button class="mode-btn selected" data-mode="reply" onclick="selectMode(this)">
+      <div class="mode-icon reply">✍️</div>
+      <div class="mode-text">
+        <h3>Antwort generieren</h3>
+        <p>Draft ohne Terminvorschlag</p>
+      </div>
+    </button>
+    <button class="mode-btn" data-mode="reply_calendar" onclick="selectMode(this)">
+      <div class="mode-icon calendar">📅</div>
+      <div class="mode-text">
+        <h3>Antwort mit Terminvorschlag</h3>
+        <p>Draft + freie Kalenderslots</p>
+      </div>
+    </button>
+    <button class="mode-btn" data-mode="calendar_only" onclick="selectMode(this)">
+      <div class="mode-icon cal-only">🗓️</div>
+      <div class="mode-text">
+        <h3>Nur Terminvorschlag</h3>
+        <p>Nur freie Slots, kein inhaltlicher Draft</p>
+      </div>
+    </button>
+  </div>
+
+  <div class="context-field">
+    <div class="section-label">Extra Kontext (optional)</div>
+    <textarea id="extraContext" placeholder="z.B. &quot;sag ab, bin im Urlaub&quot; oder &quot;zusagen, frag nach Agenda&quot;"></textarea>
+  </div>
+
+  <button class="generate-btn" id="generateBtn" onclick="generateDraft()">
+    Draft generieren
+  </button>
+
+  <div class="status" id="status"></div>
+
+  <!-- Office.js -->
+  <script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+  <script>
+    // ============================================================
+    // KONFIGURATION - HIER DEINE WEBHOOK URL EINTRAGEN
+    // ============================================================
+    const WEBHOOK_URL = "DEINE_N8N_WEBHOOK_URL_HIER";
+    // ============================================================
+
+    let selectedMode = "reply";
+    let mailData = {};
+
+    // Office initialisieren
+    Office.onReady(function(info) {
+      if (info.host === Office.HostType.Outlook) {
+        loadMailInfo();
+      }
+    });
+
+    function loadMailInfo() {
+      try {
+        const item = Office.context.mailbox.item;
+        const from = item.from;
+        const subject = item.subject;
+
+        document.getElementById("mailFrom").textContent = from.displayName + " <" + from.emailAddress + ">";
+        document.getElementById("mailSubject").textContent = subject;
+
+        mailData = {
+          itemId: item.itemId,
+          from: from.emailAddress,
+          fromName: from.displayName,
+          subject: subject
+        };
+
+        // Body holen
+        item.body.getAsync(Office.CoercionType.Text, function(result) {
+          if (result.status === Office.AsyncResultStatus.Succeeded) {
+            mailData.body = result.value;
+          }
+        });
+      } catch (e) {
+        document.getElementById("mailFrom").textContent = "Mail konnte nicht geladen werden";
+        console.error("Fehler beim Laden der Mail:", e);
+      }
+    }
+
+    function selectMode(btn) {
+      document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      selectedMode = btn.dataset.mode;
+    }
+
+    async function generateDraft() {
+      const btn = document.getElementById("generateBtn");
+      const status = document.getElementById("status");
+      const extraContext = document.getElementById("extraContext").value.trim();
+
+      btn.disabled = true;
+      btn.textContent = "Generiere...";
+      status.className = "status loading";
+      status.innerHTML = '<span class="spinner"></span> Draft wird generiert...';
+
+      const payload = {
+        mode: selectedMode,
+        itemId: mailData.itemId,
+        from: mailData.from,
+        fromName: mailData.fromName,
+        subject: mailData.subject,
+        body: mailData.body || "",
+        extraContext: extraContext
+      };
+
+      try {
+        const response = await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error("Server Fehler: " + response.status);
+        }
+
+        const result = await response.json();
+
+        status.className = "status success";
+        status.textContent = "✓ Draft wurde erstellt! Check deine Drafts.";
+      } catch (error) {
+        console.error("Fehler:", error);
+        status.className = "status error";
+        status.textContent = "✗ Fehler: " + error.message;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Draft generieren";
+      }
+    }
+  </script>
+</body>
+</html>
