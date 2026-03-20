@@ -364,7 +364,7 @@
       try {
         const response = await fetch(WEBHOOK_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "X-Zenaris-Token": "zrs-k8xP4mQ9wL7nJ2vB-2026" },
           body: JSON.stringify(payload)
         });
 
