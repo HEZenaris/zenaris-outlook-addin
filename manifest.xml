@@ -12,13 +12,13 @@
   <DisplayName DefaultValue="Zenaris Draft" />
   <Description DefaultValue="AI Draft Generator mit Kalender Integration" />
 
-  <IconUrl DefaultValue="https://DEIN_GITHUB_USERNAME.github.io/zenaris-outlook-addin/icon-64.png" />
-  <HighResolutionIconUrl DefaultValue="https://DEIN_GITHUB_USERNAME.github.io/zenaris-outlook-addin/icon-128.png" />
+  <IconUrl DefaultValue="https://HEZenaris.github.io/zenaris-outlook-addin/icon-64.png" />
+  <HighResolutionIconUrl DefaultValue="https://HEZenaris.github.io/zenaris-outlook-addin/icon-128.png" />
 
   <SupportUrl DefaultValue="https://zenaris.com" />
 
   <AppDomains>
-    <AppDomain>https://DEIN_GITHUB_USERNAME.github.io</AppDomain>
+    <AppDomain>https://HEZenaris.github.io</AppDomain>
   </AppDomains>
 
   <Hosts>
@@ -34,7 +34,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://DEIN_GITHUB_USERNAME.github.io/zenaris-outlook-addin/taskpane.html" />
+        <SourceLocation DefaultValue="https://HEZenaris.github.io/zenaris-outlook-addin/taskpane.html" />
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -87,12 +87,12 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="icon16" DefaultValue="https://DEIN_GITHUB_USERNAME.github.io/zenaris-outlook-addin/icon-16.png" />
-        <bt:Image id="icon32" DefaultValue="https://DEIN_GITHUB_USERNAME.github.io/zenaris-outlook-addin/icon-32.png" />
-        <bt:Image id="icon80" DefaultValue="https://DEIN_GITHUB_USERNAME.github.io/zenaris-outlook-addin/icon-80.png" />
+        <bt:Image id="icon16" DefaultValue="https://HEZenaris.github.io/zenaris-outlook-addin/icon-16.png" />
+        <bt:Image id="icon32" DefaultValue="https://HEZenaris.github.io/zenaris-outlook-addin/icon-32.png" />
+        <bt:Image id="icon80" DefaultValue="https://HEZenaris.github.io/zenaris-outlook-addin/icon-80.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="taskpaneUrl" DefaultValue="https://DEIN_GITHUB_USERNAME.github.io/zenaris-outlook-addin/taskpane.html" />
+        <bt:Url id="taskpaneUrl" DefaultValue="https://HEZenaris.github.io/zenaris-outlook-addin/taskpane.html" />
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="groupLabel" DefaultValue="Zenaris" />

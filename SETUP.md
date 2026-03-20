@@ -39,9 +39,9 @@ zenaris-outlook-addin/
 
 ## Schritt 3: URLs in den Dateien anpassen
 
-In **manifest.xml** alle Stellen mit `DEIN_GITHUB_USERNAME` ersetzen:
+In **manifest.xml** alle Stellen mit `HEZenaris` ersetzen:
 
-Suche nach: `DEIN_GITHUB_USERNAME.github.io`
+Suche nach: `HEZenaris.github.io`
 Ersetze mit: `dein-echter-username.github.io`
 
 (Kommt 6 mal vor in der Datei)
