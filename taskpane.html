@@ -352,7 +352,7 @@
 
       const payload = {
         mode: selectedMode,
-        itemId: mailData.itemId,
+        itemId: mailData.itemId.replace(/\+/g, '-PLUS-').replace(/\//g, '-SLASH-'),
         from: mailData.from,
         fromName: mailData.fromName,
         subject: mailData.subject,
